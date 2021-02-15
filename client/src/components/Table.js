@@ -2,16 +2,28 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./table.css";
 import TableEmployees from "./TableEmployees";
+import Spinner from "./Spinner";
 
 const Index = () => {
   const [employees, setEmployees] = useState([]);
   const [shiftsList, setShiftsList] = useState([]);
   const [showButtonIndex, setShowButtonIndex] = useState("");
   const [hideButtons, setHideButtons] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [day, setDay] = useState("");
   const [shiftId, setShiftId] = useState("");
   const [shiftToBeAdded, setShiftToBeAdded] = useState("");
   const [employeeNameInTable, setEmployeeNameInTable] = useState("");
+  const [morningUS, setMorningUS] = useState(null);
+  const [morningDS, setMorningDS] = useState(null);
+  const [morningPL, setMorningPL] = useState(null);
+  const [lunchA, setLunchA] = useState(null);
+  const [lunchB, setLunchB] = useState(null);
+  const [lunchC, setLunchC] = useState(null);
+  const [lunchD, setLunchD] = useState(null);
+  const [afternoonUS, setAfternoonUS] = useState(null);
+  const [afternoonDS, setAfternoonDS] = useState(null);
+  const [afternoonPL, setAfternoonPL] = useState(null);
 
   useEffect(() => {
     fetchInitialData();
@@ -34,7 +46,6 @@ const Index = () => {
       thursday: null,
       friday: null,
     };
-
     const shiftRequest1 = axios.put(`/shifts_list/1`, updatedObj);
     const shiftRequest2 = axios.put(`/shifts_list/2`, updatedObj);
     const shiftRequest3 = axios.put(`/shifts_list/3`, updatedObj);
@@ -47,6 +58,7 @@ const Index = () => {
     const shiftRequest10 = axios.put(`/shifts_list/11`, updatedObj);
     const shiftRequestReset = axios.delete(`/shifts/reset`);
 
+    setIsLoading(true);
     await axios
       .all([
         shiftRequest1,
@@ -64,10 +76,12 @@ const Index = () => {
       .then(
         axios.spread(() => {
           console.log("Evrything is empty!");
+          setIsLoading(false);
         })
       )
       .catch((errors) => {
         console.log(errors);
+        setIsLoading(false);
         // react on errors.
       });
 
@@ -160,6 +174,7 @@ const Index = () => {
               shiftToBeAdded === "Lunch D")
         );
 
+        //Check for the number of shifts in a day
         const checkForShifts = res.data.Shifts.filter(
           (shift) =>
             shift.day === day &&
@@ -169,6 +184,7 @@ const Index = () => {
               shift.shiftName !== "Lunch D")
         );
 
+        //Check for how many shifts in a week (No lunch included)
         const checkForShiftsInAWeek = res.data.Shifts.filter(
           (shift) =>
             shift.shiftName !== "" &&
@@ -178,6 +194,7 @@ const Index = () => {
             shift.shiftName !== "Lunch D"
         );
 
+        //Check for shifts in a day (No Lunch)
         const checkForShiftsWithNoLunch = res.data.Shifts.filter(
           (shift) =>
             shift.day === day &&
@@ -188,6 +205,7 @@ const Index = () => {
             shift.shiftName !== "Lunch D"
         );
 
+        //Check if employee has been assigned to a shift in one place (Morning)
         const checkForTwoPlacesMorning = res.data.Shifts.filter(
           (shift) => shift.shiftName !== "" && shift.day === day
         ).filter(
@@ -450,29 +468,31 @@ const Index = () => {
   });
 
   return (
-    <div className="waitList-admin-container">
-      <h4>
-        Schedule by Alex Y. Sanabria{" "}
-        <button onClick={resetWholeSchedule} className="btn-danger">
-          Reset Schedule
-        </button>
-      </h4>
+    <Spinner isLoading={isLoading}>
+      <div className="waitList-admin-container">
+        <h4>
+          Schedule by Alex Y. Sanabria{" "}
+          <button onClick={resetWholeSchedule} className="btn-danger">
+            Reset Schedule
+          </button>
+        </h4>
 
-      <table>
-        <tbody>
-          <tr>
-            <th>Shift</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-          </tr>
-          {shifts}
-        </tbody>
-      </table>
-      <TableEmployees employees={employees} />
-    </div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Shift</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+            {shifts}
+          </tbody>
+        </table>
+        <TableEmployees employees={employees} />
+      </div>
+    </Spinner>
   );
 };
 

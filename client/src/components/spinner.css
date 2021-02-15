@@ -1,0 +1,8 @@
+._loading_overlay_content {
+  color: white;
+  font-size: 30px;
+}
+
+._loading_overlay_wrapper {
+  height: 100vh;
+}
