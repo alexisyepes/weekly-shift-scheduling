@@ -15,4 +15,4 @@ Live demo: https://shift-schedule-alex.herokuapp.com/
 - NodeJs
 - Express
 
-![IMAGE](./client/public/images/screenshot.png)
+![IMAGE](https://res.cloudinary.com/amazing-pet-grooming/image/upload/v1613396901/varios/screenshot_j68mzz.png)
