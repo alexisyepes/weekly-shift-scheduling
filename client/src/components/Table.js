@@ -55,7 +55,7 @@ const Index = () => {
     const shiftRequest7 = axios.put(`/shifts_list/7`, updatedObj);
     const shiftRequest8 = axios.put(`/shifts_list/8`, updatedObj);
     const shiftRequest9 = axios.put(`/shifts_list/9`, updatedObj);
-    const shiftRequest10 = axios.put(`/shifts_list/11`, updatedObj);
+    const shiftRequest10 = axios.put(`/shifts_list/10`, updatedObj);
     const shiftRequestReset = axios.delete(`/shifts/reset`);
 
     setIsLoading(true);
