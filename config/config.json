@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "83Viernes",
-    "database": "schedule-aerotek",
+    "password": "isaramac",
+    "database": "test",
     "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"

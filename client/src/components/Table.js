@@ -14,16 +14,16 @@ const Index = () => {
   const [shiftId, setShiftId] = useState("");
   const [shiftToBeAdded, setShiftToBeAdded] = useState("");
   const [employeeNameInTable, setEmployeeNameInTable] = useState("");
-  const [morningUS, setMorningUS] = useState(null);
-  const [morningDS, setMorningDS] = useState(null);
-  const [morningPL, setMorningPL] = useState(null);
-  const [lunchA, setLunchA] = useState(null);
-  const [lunchB, setLunchB] = useState(null);
-  const [lunchC, setLunchC] = useState(null);
-  const [lunchD, setLunchD] = useState(null);
-  const [afternoonUS, setAfternoonUS] = useState(null);
-  const [afternoonDS, setAfternoonDS] = useState(null);
-  const [afternoonPL, setAfternoonPL] = useState(null);
+  // const [morningUS, setMorningUS] = useState(null);
+  // const [morningDS, setMorningDS] = useState(null);
+  // const [morningPL, setMorningPL] = useState(null);
+  // const [lunchA, setLunchA] = useState(null);
+  // const [lunchB, setLunchB] = useState(null);
+  // const [lunchC, setLunchC] = useState(null);
+  // const [lunchD, setLunchD] = useState(null);
+  // const [afternoonUS, setAfternoonUS] = useState(null);
+  // const [afternoonDS, setAfternoonDS] = useState(null);
+  // const [afternoonPL, setAfternoonPL] = useState(null);
 
   useEffect(() => {
     fetchInitialData();
