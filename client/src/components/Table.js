@@ -23,7 +23,7 @@ const Index = () => {
   // const [lunchD, setLunchD] = useState(null);
   // const [afternoonUS, setAfternoonUS] = useState(null);
   // const [afternoonDS, setAfternoonDS] = useState(null);
-  // const [afternoonPL, setAfternoonPL] = useState(null);
+  // const [afternoonPL, setAfternoonPL] = useState(null); don't need these states at all
 
   useEffect(() => {
     fetchInitialData();
